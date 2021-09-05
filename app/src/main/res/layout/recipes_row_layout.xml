@@ -126,11 +126,11 @@
                     android:id="@+id/calorie_imageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:tint="@color/red"
                     app:layout_constraintEnd_toEndOf="@+id/calorie_textView"
                     app:layout_constraintStart_toStartOf="@+id/calorie_textView"
                     app:layout_constraintTop_toTopOf="@+id/heart_imageView"
-                    app:srcCompat="@drawable/ic_fire" />
+                    app:srcCompat="@drawable/ic_fire"
+                    app:tint="#FF5722" />
 
                 <TextView
                     android:id="@+id/calorie_textView"
