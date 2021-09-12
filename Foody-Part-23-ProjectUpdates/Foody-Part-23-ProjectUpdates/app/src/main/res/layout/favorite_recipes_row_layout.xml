@@ -6,7 +6,7 @@
 
         <variable
             name="favoritesEntity"
-            type="com.example.foody.data.database.entities.FavoritesEntity" />
+            type="com.example.instachef.data.database.entities.FavoritesEntity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

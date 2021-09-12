@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/recipesFragment"
-        android:name="com.example.foody.ui.fragments.recipes.RecipesFragment"
+        android:name="com.example.instachef.ui.fragments.recipes.RecipesFragment"
         android:label="Recipes"
         tools:layout="@layout/fragment_recipes" >
         <action
@@ -23,7 +23,7 @@
     </fragment>
     <fragment
         android:id="@+id/favoriteRecipesFragment"
-        android:name="com.example.foody.ui.fragments.favorites.FavoriteRecipesFragment"
+        android:name="com.example.instachef.ui.fragments.favorites.FavoriteRecipesFragment"
         android:label="Favorites"
         tools:layout="@layout/fragment_favorite_recipes" >
         <action
@@ -32,12 +32,12 @@
     </fragment>
     <fragment
         android:id="@+id/shoppingCartFragment"
-        android:name="com.example.foody.ui.fragments.shoppingcart.ShoppingCartFragment"
+        android:name="com.example.instachef.ui.fragments.shoppingcart.ShoppingCartFragment"
         android:label="Shopping Cart"
         tools:layout="@layout/fragment_food_joke" />
     <dialog
         android:id="@+id/recipesBottomSheet"
-        android:name="com.example.foody.ui.fragments.recipes.bottomsheet.RecipesBottomSheet"
+        android:name="com.example.instachef.ui.fragments.recipes.bottomsheet.RecipesBottomSheet"
         android:label="recipes_bottom_sheet"
         tools:layout="@layout/recipes_bottom_sheet" >
         <action
@@ -48,16 +48,16 @@
     </dialog>
     <activity
         android:id="@+id/detailsActivity"
-        android:name="com.example.foody.ui.DetailsActivity"
+        android:name="com.example.instachef.ui.DetailsActivity"
         android:label="Details"
         tools:layout="@layout/activity_details" >
         <argument
             android:name="result"
-            app:argType="com.example.foody.models.Result" />
+            app:argType="com.example.instachef.models.Result" />
     </activity>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.foody.ui.login.LoginFragment"
+        android:name="com.example.instachef.ui.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action

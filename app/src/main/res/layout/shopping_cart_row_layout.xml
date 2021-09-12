@@ -6,11 +6,11 @@
 
         <variable
             name="shoppingCartEntity"
-            type="com.example.foody.data.database.entities.ShoppingCartEntity" />
+            type="com.example.instachef.data.database.entities.ShoppingCartEntity" />
 
         <variable
             name="mAdapter"
-            type="com.example.foody.adapters.ShoppingCartAdapter" />
+            type="com.example.instachef.adapters.ShoppingCartAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

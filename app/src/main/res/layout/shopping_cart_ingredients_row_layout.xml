@@ -8,11 +8,11 @@
 
         <variable
             name="shoppingCartIngreEntity"
-            type="com.example.foody.data.database.entities.ShoppingCartIngreEntity" />
+            type="com.example.instachef.data.database.entities.ShoppingCartIngreEntity" />
 
         <variable
             name="mAdapter"
-            type="com.example.foody.adapters.ShoppingCartIngreAdapter" />
+            type="com.example.instachef.adapters.ShoppingCartIngreAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
