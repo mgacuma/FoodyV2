@@ -24,8 +24,8 @@ class StickyHeaderDecorator(context: Context) : RecyclerView.ItemDecoration() {
     private val colorText = context.resources.getColor(R.color.itemColor)
 
     private val categoryList = mutableListOf<String>()
-    private val categorySet = mutableSetOf<String>()//记录有多少组子标题
-    val categoryHeaderMap = mutableMapOf<String, Int>()//记录每组子标题开始的位置
+    private val categorySet = mutableSetOf<String>()//recording how many sets of subtitles we have
+    val categoryHeaderMap = mutableMapOf<String, Int>()//Record the start position of each set of subtitles
     private var categoryName = ""
 
     fun setCategoryList(value: List<String>) {
@@ -34,7 +34,7 @@ class StickyHeaderDecorator(context: Context) : RecyclerView.ItemDecoration() {
         categorySet.clear()
         categorySet.addAll(value)
 
-        //如果分组只有一个的情况，即隐藏粘性标题
+        //If there is only one set, the sticky title is hidden
         if (categorySet.size > 1) {
             hideCategoryHeader?.invoke(false)
         } else {
@@ -42,19 +42,19 @@ class StickyHeaderDecorator(context: Context) : RecyclerView.ItemDecoration() {
         }
     }
 
-    //设置文字属性
+    //Set text attributes
     private val textPaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
         color = colorText
         textSize = 18.toSp()
     }
 
-    private val headerMarginStart = 36.toDp() //子标题内容与左侧的距离
-    private val headerSpaceHeight = 15.toDp() //为每个子标题对应最后一个item添加空隙高度
-    private val headerBackgroundHeight = 40.toDp()//子标题背景高度
-    private val headerBackgroundRadius = 10.toDp()//为子标题背景设置圆角
+    private val headerMarginStart = 36.toDp() //The distance between the subtitle content and the left
+    private val headerSpaceHeight = 15.toDp() //Add a gap height for each subtitle corresponding to the last item
+    private val headerBackgroundHeight = 40.toDp()
+    private val headerBackgroundRadius = 10.toDp()
 
-    //简单的理解
-    // 设置item布局间隙（留空间给draw方法绘制）
+    
+    // set item layout（Leave room for the draw method to draw）
     override fun getItemOffsets(
         outRect: Rect,
         view: View,
@@ -66,18 +66,18 @@ class StickyHeaderDecorator(context: Context) : RecyclerView.ItemDecoration() {
         if (adapterPosition == RecyclerView.NO_POSITION) {
             return
         }
-        //Top 头部
+        //Top 
         if (isFirstOfGroup(adapterPosition)) {
             outRect.top = headerBackgroundHeight.toInt()
             categoryHeaderMap[categoryList[adapterPosition]] = adapterPosition
         }
-        //Bottom 底部
+        //Bottom 
         if (isEndOfGroup(adapterPosition)) {
             outRect.bottom = headerSpaceHeight.toInt()
         }
     }
 
-    //可在此方法中绘制背景
+    //The background can be drawn in this method
     override fun onDraw(canvas: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         if (isHideInventoryHeader()) return
         val count = parent.childCount
@@ -94,7 +94,7 @@ class StickyHeaderDecorator(context: Context) : RecyclerView.ItemDecoration() {
                 val bottom = child.top.toFloat()
                 val radius = headerBackgroundRadius
                 paint.color = colorBg
-                //绘制背景
+                //draw background
                 canvas.drawRoundRect(
                     left, top, right, bottom, radius,
                     radius, paint
@@ -103,17 +103,17 @@ class StickyHeaderDecorator(context: Context) : RecyclerView.ItemDecoration() {
         }
     }
 
-    //留的空间给draw方法绘制内容/粘性标题也在此设置
+    //Leave space for the draw method to draw content, Sticky titles are also set here
     override fun onDrawOver(canvas: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         if (isHideInventoryHeader()) return
         val count = parent.childCount
         if (count == 0) {
             return
         }
-        //在每个背景上绘制文字
+        //Draw text on each background
         drawHeaderTextIndex(canvas, parent)
 
-        //绘制粘性标题
+        //draw sticky title
         drawStickyTimestampIndex(canvas, parent)
     }
 
@@ -128,7 +128,7 @@ class StickyHeaderDecorator(context: Context) : RecyclerView.ItemDecoration() {
                 val categoryName = categoryList[adapterPosition]
                 val start = child.left + headerMarginStart
                 val fontMetrics = textPaint.fontMetrics
-                //计算文字自身高度
+                //Calculate the height of the text itself
                 val fontHeight = fontMetrics.bottom - fontMetrics.top
                 val baseline =
                     child.top.toFloat() - (headerBackgroundHeight - fontHeight) / 2 - fontMetrics.bottom
@@ -157,13 +157,13 @@ class StickyHeaderDecorator(context: Context) : RecyclerView.ItemDecoration() {
                 val name = categoryList[firstVisiblePosition]
                 if (categoryName != name) {
                     categoryName = name
-                    // 监听当前滚动到的标题
+                    // monitor the title currently scrolled to
                     categoryName?.let { name ->
                         updateCategoryHeader?.invoke(name)
                     }
                 }
                 val start = child.left + headerMarginStart
-                //计算文字高度
+                //Calculate the height of the text itself
                 val fontMetrics = textPaint.fontMetrics
                 val fontHeight = fontMetrics.bottom - fontMetrics.top
                 val baseline =
@@ -171,16 +171,16 @@ class StickyHeaderDecorator(context: Context) : RecyclerView.ItemDecoration() {
 
                 var upwardBottom = bottom
                 var upwardBaseline = baseline
-                // 下一个组马上到达顶部
+                // The next group will reach the top immediately
                 if (isFirstOfGroup(firstVisiblePosition + 1)) {
                     upwardBottom = min(child.bottom.toFloat() + headerSpaceHeight, bottom)
                     if (child.bottom.toFloat() + headerSpaceHeight < headerBackgroundHeight) {
                         upwardBaseline = baseline * (child.bottom.toFloat() + headerSpaceHeight)/headerBackgroundHeight
                     }
                 }
-                //绘制粘性标题背景
+                //Draw a sticky title background
                 canvas.drawRoundRect(left, top, right, upwardBottom, radius, radius, paint)
-                //绘制粘性标题
+                //Draw a sticky title
                 if (categoryName != null) {
                     canvas.drawText(categoryName.toUpperCase(), start, upwardBaseline, textPaint)
                 }
@@ -188,18 +188,18 @@ class StickyHeaderDecorator(context: Context) : RecyclerView.ItemDecoration() {
         }
     }
 
-    //判断是不是每组的第一个item
+    //check if it is the first item in each group
     private fun isFirstOfGroup(adapterPosition: Int): Boolean {
         return adapterPosition == 0 || categoryList[adapterPosition] != categoryList[adapterPosition - 1]
     }
 
-    //判断是不是每组的最后一个item
+    //check if it is the last item in each group
     private fun isEndOfGroup(adapterPosition: Int): Boolean {
         if (adapterPosition + 1 == categoryList.size) return true
         return categoryList[adapterPosition] != categoryList[adapterPosition + 1]
     }
 
-    //如果分组只有一个的情况，即隐藏标题
+    //If there is only one group, the title is hidden
     private fun isHideInventoryHeader(): Boolean {
         return categorySet.size <= 1 || categoryList.isNullOrEmpty()
     }
