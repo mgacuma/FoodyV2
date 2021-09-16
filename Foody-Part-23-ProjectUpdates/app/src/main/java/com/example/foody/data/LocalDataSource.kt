@@ -2,7 +2,6 @@ package com.example.foody.data
 
 import com.example.foody.data.database.RecipesDao
 import com.example.foody.data.database.entities.*
-import com.example.foody.models.FoodJoke
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -18,9 +17,6 @@ class LocalDataSource @Inject constructor(
         return recipesDao.readFavoriteRecipes()
     }
 
-    fun readFoodJoke(): Flow<List<FoodJokeEntity>> {
-        return recipesDao.readFoodJoke()
-    }
 
     fun readShoppingCart(): Flow<List<ShoppingCartEntity>> {
         return recipesDao.readShoppingCart()
@@ -36,6 +32,10 @@ class LocalDataSource @Inject constructor(
 
     fun readShoppingCartIngreById(id: Int): List<ShoppingCartIngreEntity> {
         return recipesDao.readShoppingCartIngredientById(id)
+    }
+
+    fun readShoppingCartIngreByNameAndAmount(name: String, amount: Double): List<ShoppingCartIngreEntity> {
+        return recipesDao.readShoppingCartIngredientByNameAndAmount(name, amount)
     }
 
     suspend fun insertShoppingCart(shoppingCartEntity: ShoppingCartEntity) {
@@ -60,10 +60,6 @@ class LocalDataSource @Inject constructor(
 
     suspend fun insertFavoriteRecipes(favoritesEntity: FavoritesEntity) {
         recipesDao.insertFavoriteRecipe(favoritesEntity)
-    }
-
-    suspend fun insertFoodJoke(foodJokeEntity: FoodJokeEntity) {
-        recipesDao.insertFoodJoke(foodJokeEntity)
     }
 
     suspend fun deleteFavoriteRecipe(favoritesEntity: FavoritesEntity) {

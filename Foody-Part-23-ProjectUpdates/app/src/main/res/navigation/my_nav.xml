@@ -33,8 +33,7 @@
     <fragment
         android:id="@+id/shoppingCartFragment"
         android:name="com.example.foody.ui.fragments.shoppingcart.ShoppingCartFragment"
-        android:label="Shopping Cart"
-        tools:layout="@layout/fragment_food_joke" />
+        android:label="Shopping Cart" />
     <dialog
         android:id="@+id/recipesBottomSheet"
         android:name="com.example.foody.ui.fragments.recipes.bottomsheet.RecipesBottomSheet"

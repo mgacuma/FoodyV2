@@ -6,7 +6,7 @@ import androidx.room.TypeConverters
 import com.example.foody.data.database.entities.*
 
 @Database(
-    entities = [RecipesEntity::class, FavoritesEntity::class, FoodJokeEntity::class, ShoppingCartEntity::class, ShoppingCartIngreEntity::class],
+    entities = [RecipesEntity::class, FavoritesEntity::class, ShoppingCartEntity::class, ShoppingCartIngreEntity::class],
     version = 1,
     exportSchema = false
 )

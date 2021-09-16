@@ -40,8 +40,9 @@ class IngredientsFragment : Fragment() {
 
         setupRecyclerView()
         myBundle?.extendedIngredients?.let {
-            mAdapter.setData(it)
-            val list = it.map { ingredient -> ingredient.consistency }
+            var sorted = it.sortedBy { ingredient -> ingredient.aisle }
+            mAdapter.setData(sorted)
+            val list = sorted.map { ingredient -> ingredient.aisle }
             stickyHeaderDecorator.setCategoryList(list as List<String>)
         }
 

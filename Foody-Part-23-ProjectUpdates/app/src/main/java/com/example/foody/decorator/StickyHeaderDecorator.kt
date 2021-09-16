@@ -132,7 +132,9 @@ class StickyHeaderDecorator(context: Context) : RecyclerView.ItemDecoration() {
                 val fontHeight = fontMetrics.bottom - fontMetrics.top
                 val baseline =
                     child.top.toFloat() - (headerBackgroundHeight - fontHeight) / 2 - fontMetrics.bottom
-                canvas.drawText(categoryName.toUpperCase(), start, baseline, textPaint)
+                if (categoryName != null) {
+                    canvas.drawText(categoryName.toUpperCase(), start, baseline, textPaint)
+                }
             }
         }
     }
@@ -179,7 +181,9 @@ class StickyHeaderDecorator(context: Context) : RecyclerView.ItemDecoration() {
                 //绘制粘性标题背景
                 canvas.drawRoundRect(left, top, right, upwardBottom, radius, radius, paint)
                 //绘制粘性标题
-                canvas.drawText(categoryName.toUpperCase(), start, upwardBaseline, textPaint)
+                if (categoryName != null) {
+                    canvas.drawText(categoryName.toUpperCase(), start, upwardBaseline, textPaint)
+                }
             }
         }
     }

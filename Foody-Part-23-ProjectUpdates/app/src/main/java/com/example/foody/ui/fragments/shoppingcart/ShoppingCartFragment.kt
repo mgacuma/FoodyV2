@@ -53,8 +53,8 @@ class ShoppingCartFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId == R.id.deleteAll_favorite_recipes_menu){
-//            mainViewModel.deleteAllFavoriteRecipes()
-            showSnackBar()
+            mainViewModel.deleteAllShoppingCarts()
+            showSnackBar("You have deleted all recipes!")
         }
         return super.onOptionsItemSelected(item)
     }
